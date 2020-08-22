@@ -1,0 +1,144 @@
+
+<!-- Toolbar -->
+<div class="toolbar" role="banner">
+  <span class="pl-4">Doctor Management System</span>
+  
+    <div class="spacer"></div>
+    <a aria-label="Angular on twitter" target="_blank" rel="noopener" href="https://twitter.com/angular" title="Twitter">
+    
+    </a>
+</div>
+
+<div class="content" role="main">
+
+  <div class="container">
+    <button class="btn btn-primary mb-3" (click) ="showform()" *ngIf="isbtn">+ Create New</button>
+
+
+<div class="jumbotron" *ngIf="isform">
+    <form #myform = "ngForm" >
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                  <label for="doctorname">Doctor Name(*)</label>
+                  <input type="text" class="form-control" name="name" required  [(ngModel)] ="doctorObj.name">
+                  
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Hospital Name</label>
+                  <input type="text" class="form-control" name="hospital" required [(ngModel)] ="doctorObj.hospital">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group ">
+                    <label for="department">Department</label>
+                    <input type="text" class="form-control" name="department" required [(ngModel)] ="doctorObj.department">
+                </div>
+              </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Designation</label>
+                  <input type="text" class="form-control"  name="designation" required [(ngModel)] ="doctorObj.designation">
+                  
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Date</label>
+                  <input type="date" class="form-control" name="date" required [(ngModel)] ="doctorObj.date">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group ">
+                    <label for="exampleInputPassword1">Time</label>
+                    <input type="time" class="form-control" name="time" required [(ngModel)] ="doctorObj.time">
+                </div>
+              </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Location1</label>
+                  <input type="text" class="form-control"  name="location1" required [(ngModel)] ="doctorObj.location1">
+                  
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Location2</label>
+                  <input type="text" class="form-control" name="location2" required [(ngModel)] ="doctorObj.location2">
+                </div>
+              </div>
+              
+        </div>
+        
+        
+        <button type="button" class="btn btn-primary" (click)="adddoctors(myform)">Submit</button>
+      </form>
+</div>
+    
+
+<div class="table-responsive">
+    <div class="form-group mb-4">
+        <input class="form-control" type="text" [(ngModel)]="searchText" placeholder="Search records">
+      </div>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">NAME</th>
+            <th scope="col">ROLE</th>
+            <th scope="col">DATE AND TIME</th>
+            <th scope="col">LOCATION</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor ="let doctor of allDoctors | filter: searchText">
+              <th scope="row"><img src="../assets/images/doctor.PNG" alt="Doctor" style=" max-width:60px; height:auto"  ></th>
+              <td>
+                  <Div>
+                    <span>{{doctor.name}}</span>
+                    <span>{{doctor.hospital}}</span>
+                  </Div>
+                </td>
+                <td>
+                    <Div>
+                        <span> {{doctor.department}}</span>
+                        <span>{{doctor.designation}}</span>
+                    </Div>
+                 </td>
+                <td>
+                    <Div>
+                        <span> {{doctor.date}}</span>
+                        <span>{{doctor.time}}</span>
+                    </Div>
+                </td>
+                <td>
+                  <Div>
+                    <span> {{doctor.location1}}</span>
+                    <span>{{doctor.location2}}</span>
+                </Div>
+              </td>
+                <td>
+                  <button edit (click)="editdoctors(doctor)" class="btn btn-default" *ngIf="isEdit">Edit</button>
+                  <button (click)="updateDoctor(doctor)" update class="btn btn-default" *ngIf="isUpdate && index ===doctor.id">Update</button>
+                  <button (click)="deleteDoctor(doctor)" delete class="btn btn-default" *ngIf="isDelete">Delete</button>
+                </td>
+          </tr>
+          
+    
+        </tbody>
+      </table>
+</div>  
+
+  </div>
+</div>
+
+
+
+
